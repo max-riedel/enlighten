@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript" lang="javascript" src="jquery-min.js">
+    </script>
+
+
+    <script type="text/javascript" lang="javascript">
+        $(document).ready(function () {
+            $('#submit').click(function () {
+                $.ajax('/', {
+                    method: 'POST',
+                    async: false,
+                    data: {
+                        'hex': $('#hex').val()
+                    },
+                    success: function (data) {
+                        $('.output').html(data);
+                    }
+                })
+            });
+
+            // $('#ColorInput').wheelColorPicker();
+            $('#ColorInput').on('slidermove', function() {        // was sliderup
+                var t = $(this);
+                $('#hex').val(t.val());
+                $('#submit').click();
+            })
+        })
+    </script>
+</head>
+<body>
+<script type="text/javascript" lang="javascript"
+        src="jquery-wheelcolorpicker-2.4.5/jquery.wheelcolorpicker.js">
+</script>
+<link type="text/css" rel="stylesheet" href="jquery-wheelcolorpicker-2.4.5/css/wheelcolorpicker.css">
+<input type="text" maxlength="6" size="6" placeholder="HEX" id="hex" data-wheelcolorpicker/>
+<input type="button" id="submit" value="Go"/>
+<br>
+<input type="text" name="color" id="ColorInput" value="#ff0000" data-wheelcolorpicker="" data-wcp-layout="block"/>
+<div class="output"></div>
+</body>
+</html>
